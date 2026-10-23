@@ -1,0 +1,168 @@
+/* Box Model */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #fff5f8;
+    --teks: #4a2433;
+    --pink: #ffe3ec;
+    --pink-muda: #ffd0de;
+    --pink-nav: #f4a6c0;
+    --pink-hover: #f08bad;
+    --garis: #f6c9d8;
+    --tombol: #c2456f;
+    --tombol-hover: #a3335a;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--teks);
+    line-height: 1.5;
+}
+
+/* Header dan Navigasi (Flexbox), tampilan mobile dulu */
+header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px;
+    background: var(--pink);
+    color: var(--teks);
+    border-bottom: 4px solid var(--pink-nav);
+}
+
+nav {
+    background: var(--pink-nav);
+    padding: 0 16px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 16px;
+}
+
+nav a {
+    display: block;
+    padding: 12px 8px;
+    color: var(--teks);
+    text-decoration: none;
+}
+
+nav a:hover {
+    background: var(--pink-hover);
+}
+
+/* Tata letak utama (Grid) */
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+}
+
+section {
+    background: #fff;
+    border: 1px solid var(--garis);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+h2 {
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+}
+
+/* Tabel */
+#inventaris {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid var(--garis);
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background: var(--pink-muda);
+}
+
+/* Formulir (Grid) */
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #e2a9b8;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background: var(--tombol);
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--tombol-hover);
+}
+
+footer {
+    padding: 16px;
+    text-align: center;
+    background: var(--pink-nav);
+    color: var(--teks);
+}
+
+/* Tablet: 600px sampai 1024px */
+@media (min-width: 600px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    form {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    form button {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Desktop: lebih dari 1024px */
+@media (min-width: 1025px) {
+    main {
+        grid-template-columns: 2fr 1fr;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: start;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+    }
+}
