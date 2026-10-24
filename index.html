@@ -23,6 +23,7 @@
 
         <section id="inventaris">
             <h2>Tabel Inventaris Barang</h2>
+            <input type="text" id="cari" placeholder="Cari barang..." aria-label="Cari barang">
             <table>
                 <thead>
                     <tr>
@@ -68,7 +69,7 @@
 
         <section id="form-barang">
             <h2>Formulir Input Barang</h2>
-            <form action="#" method="post">
+            <form id="formBarang" action="#" method="post">
                 <p>
                     <label for="kode">Kode Barang</label><br>
                     <input type="text" id="kode" name="kode" placeholder="Contoh: BRG-005" required>
@@ -108,7 +109,8 @@
     <footer>
         <p>&copy; 2026 SIM-Barang | Salsabila Julia Mecca | 062530801595 | 3IB</p>
     </footer>
-
-    
+    <div id="toast" class="toast"></div>
+    <script src="main.js"></script>
+  
 </body>
 </html>
