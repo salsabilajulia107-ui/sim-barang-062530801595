@@ -38,8 +38,10 @@ form.addEventListener("submit", function (event) {
     }
 
     // Lolos validasi
-    tampilkanToast("Data barang berhasil divalidasi!", "sukses");
-    form.reset();
+        tampilkanToast("Data barang berhasil divalidasi!", "sukses");
+        setTimeout(function () {
+        form.submit();
+  }, 800);
 });
 
 // Pencarian tabel secara real-time
