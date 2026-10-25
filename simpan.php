@@ -1,4 +1,13 @@
 <?php
+session_start();
+require "Barang.php";
+
+// Halaman ini hanya untuk pengguna yang sudah login
+if (!isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+
 // Fungsi statis menghitung total estimasi nilai aset
 function hitungTotalAset($jumlah, $harga)
 {
@@ -7,7 +16,7 @@ function hitungTotalAset($jumlah, $harga)
 
 // Kalau dibuka langsung tanpa kirim form, kembali ke halaman utama
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: index.html");
+    header("Location: index.php");
     exit;
 }
 
@@ -18,6 +27,9 @@ $kategori = htmlspecialchars($_POST["kategori"]);
 $jumlah   = (int) $_POST["jumlah"];
 $harga    = (float) $_POST["harga"];
 $kondisi  = htmlspecialchars($_POST["kondisi"]);
+
+// Buat objek dari class Barang
+$barang = new Barang($kode, $nama, $jumlah);
 
 $total = hitungTotalAset($jumlah, $harga);
 ?>
@@ -40,15 +52,13 @@ $total = hitungTotalAset($jumlah, $harga);
         <section>
             <h2>Data barang berhasil diterima</h2>
             <table>
-                <tr><th>Kode Barang</th><td><?= $kode ?></td></tr>
-                <tr><th>Nama Barang</th><td><?= $nama ?></td></tr>
+                <tr><th>Informasi Barang (class Barang)</th><td><?= $barang->tampilkanInfo() ?></td></tr>
                 <tr><th>Kategori</th><td><?= $kategori ?></td></tr>
-                <tr><th>Jumlah</th><td><?= $jumlah ?></td></tr>
                 <tr><th>Kondisi</th><td><?= $kondisi ?></td></tr>
                 <tr><th>Harga Satuan</th><td>Rp <?= number_format($harga, 0, ',', '.') ?></td></tr>
                 <tr><th>Total Estimasi Nilai Aset</th><td><strong>Rp <?= number_format($total, 0, ',', '.') ?></strong></td></tr>
             </table>
-            <p style="margin-top: 16px;"><a href="index.html">Kembali ke halaman utama</a></p>
+            <p style="margin-top: 16px;"><a href="index.php">Kembali ke halaman utama</a></p>
         </section>
     </main>
 
