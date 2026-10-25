@@ -6,6 +6,16 @@ if (!isset($_SESSION["login"])) {
 }
 ?>
 
+<?php
+require "koneksi.php";
+
+$sql = "SELECT b.kode_barang, b.nama_barang, k.nama_kategori, b.jumlah, b.kondisi
+        FROM barang b
+        JOIN kategori k ON b.id_kategori = k.id_kategori
+        ORDER BY b.kode_barang";
+$data = $pdo->query($sql)->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -44,35 +54,18 @@ if (!isset($_SESSION["login"])) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>BRG-001</td>
-                        <td>Laptop Asus</td>
-                        <td>Elektronik</td>
-                        <td>20</td>
-                        <td>Baik</td>
-                    </tr>
-                    <tr>
-                        <td>BRG-002</td>
-                        <td>Proyektor Epson</td>
-                        <td>Elektronik</td>
-                        <td>5</td>
-                        <td>Baik</td>
-                    </tr>
-                    <tr>
-                        <td>BRG-003</td>
-                        <td>Kursi Lab</td>
-                        <td>Furnitur</td>
-                        <td>40</td>
-                        <td>Rusak Ringan</td>
-                    </tr>
-                    <tr>
-                        <td>BRG-004</td>
-                        <td>Meja Komputer</td>
-                        <td>Furnitur</td>
-                        <td>20</td>
-                        <td>Baik</td>
-                    </tr>
-                </tbody>
+                    
+                <?php foreach ($data as $row): ?>
+                <tr>
+                    <td><?= htmlspecialchars($row['kode_barang']) ?></td>
+                    <td><?= htmlspecialchars($row['nama_barang']) ?></td>
+                    <td><?= htmlspecialchars($row['nama_kategori']) ?></td>
+                    <td><?= htmlspecialchars($row['jumlah']) ?></td>
+                    <td><?= htmlspecialchars($row['kondisi']) ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+
             </table>
         </section>
 
